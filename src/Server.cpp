@@ -73,14 +73,8 @@ int main(int argc, char *argv[])
             std::cerr << "No blob SHA provided.\n";
             return EXIT_FAILURE;
         }
-        std::string blob_sha;
-        
-        if(std::string(argv[2]) == "-p") {
-            blob_sha = argv[3];
-        } else {
-            blob_sha = argv[2];
-        }
 
+        std::string blob_sha = argv[argc - 1];
         std::string object_path = ".git/objects/" + blob_sha.substr(0, 2) + "/" + blob_sha.substr(2);
 
         std::ifstream objectFile(object_path, std::ios::binary);
