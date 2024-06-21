@@ -70,6 +70,7 @@ int main(int argc, char *argv[])
         }
     } else if (command == "cat-file") {
         if (argc < 3) {
+            std::cerr << "No blob SHA provided.\n";
             return EXIT_FAILURE;
         }
         std::string blob_sha = argv[2];
@@ -77,6 +78,7 @@ int main(int argc, char *argv[])
 
         std::ifstream objectFile(object_path, std::ios::binary);
         if (!objectFile.is_open()) {
+            std::cerr << "Unable to open the blob object file.\n";
             return EXIT_FAILURE;
         } 
 
@@ -95,6 +97,7 @@ int main(int argc, char *argv[])
         // Decompress the data
         std::vector<uint8_t> decompressedData;
         if (!decompressData(buffer, decompressedData)) {
+            std::cerr << "Failed to decompress data.\n";
             return EXIT_FAILURE;
         }
 
